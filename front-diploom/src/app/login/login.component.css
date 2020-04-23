@@ -1,0 +1,55 @@
+.example-form {
+    margin-left: auto;
+    margin-right: auto;
+      width: 100%;
+    }
+    .container-fluid {
+      margin-left: auto;
+      margin-right: auto;
+        width: 80%;
+      }
+    .example-full-width {
+      width: 100%;
+    }
+  
+    .titleLimit{
+        width: 30%;
+    }
+  
+  .example-button-row button,
+  .example-button-row a {
+    margin-right: 8px;
+  }
+  
+  .example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+  
+  button{
+    outline: 0;
+  }
+  
+  .content{
+    position: absolute;
+   margin-top: 10%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px;
+  
+      margin-left: 30%;
+      margin-right: 30%;
+      width: 40%;
+     padding-top: 5%;
+     padding-bottom: 5%;
+  }

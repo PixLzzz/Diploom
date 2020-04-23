@@ -1,1 +1,7 @@
-<p>school works!</p>
+<div *ngIf="isAuth">
+    <app-school-home></app-school-home>
+</div>
+
+<div *ngIf="isAuth==false">
+    <app-login></app-login>
+</div>
