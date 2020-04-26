@@ -1,0 +1,61 @@
+<div class="content">
+
+      <div class="container-fluid">
+          <div style="color :#3F51B5;">
+              <h1>{{title}}</h1>
+          </div>
+      
+    
+    
+          <mat-form-field>
+            <mat-label>Filière</mat-label>
+            <mat-select required [(ngModel)]="selectedValue" name="fields">
+              <mat-option *ngFor="let cat of fields" [value]="cat.value">
+                {{cat.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+          <form [formGroup]="studentForm" (ngSubmit)="onSavePoem()">
+    
+    
+          <mat-form-field class="example-full-width titleLimit">
+            <mat-label>Nom</mat-label>
+            <input type="text" matInput placeholder="Entrez le nom..." id="name"  formControlName="name" >
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="example-full-width titleLimit">
+            <mat-label>Prénom</mat-label>
+            <input type="text" matInput placeholder="Entrez le Prénom..." id="surname"  formControlName="surname" >
+          </mat-form-field>
+          
+          <br>
+
+
+          <mat-form-field class="example-full-width titleLimit">
+            <mat-label>Promo</mat-label>
+            <input type="text" matInput placeholder="Entrez la promo..." id="promo"  formControlName="promo" >
+          </mat-form-field>
+    
+        <br>
+
+
+          <h4>Ajouter un diplôme</h4>
+          <input type="file" (change)="detectFiles($event)"
+                 class="filePics" accept="application/pdf">
+          <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+          <br>
+          <br>
+          <br>
+          <button class="btn btn-success" [disabled]="studentForm.invalid"
+                  type="submit">Enregistrer
+          </button>
+    
+        </form>
+      </div>
+    
+      
+     
+    </div>

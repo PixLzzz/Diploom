@@ -1,0 +1,41 @@
+<mat-card>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Nom à rechercher">
+    </mat-form-field>
+    
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  >
+    
+        <ng-container matColumnDef="Nom">
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
+            <td class="hrefLink" mat-cell *matCellDef="let student; let i = index" ><a (click)="onViewStudent(i)">{{student.name}}</a></td>
+          </ng-container>
+        
+          <ng-container matColumnDef="Prenom">
+            <th mat-header-cell *matHeaderCellDef> Prénom </th>
+            <td mat-cell *matCellDef="let student"> {{student.surname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Filiere">
+            <th mat-header-cell *matHeaderCellDef> Filière </th>
+            <td mat-cell *matCellDef="let student"> {{student.fields}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let student"> <button  mat-icon-button style="color: crimson;" (click)="openDialog(student)">
+              <mat-icon>delete</mat-icon>
+            </button> </td>
+          </ng-container>
+
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+    
+
+</table>
+</mat-card>
+
+<br><br>

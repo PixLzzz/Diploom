@@ -20,6 +20,19 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { AngularFireModule } from '@angular/fire';
+import { AddStudentComponent } from './add-student/add-student.component';
+import { StudentListComponent } from './student-list/student-list.component';
+import { AngularFireDatabaseModule } from "@angular/fire/database";
+import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
+import { StudentService } from './student.service';
+import { HttpClientModule } from '@angular/common/http';
+import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SingleStudentComponent } from './single-student/single-student.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -30,7 +43,11 @@ firebase.initializeApp(environment.firebase);
     LoginComponent,
     NavbarComponent,
     SchoolComponent,
-    SchoolHomeComponent
+    SchoolHomeComponent,
+    AddStudentComponent,
+    StudentListComponent,
+    DialogComponent,
+    SingleStudentComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -46,8 +63,16 @@ firebase.initializeApp(environment.firebase);
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    AngularFireDatabaseModule,
+    MatSelectModule,
+    MatListModule,
+    MatTableModule,
+    MatDividerModule,
+    HttpClientModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, StudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

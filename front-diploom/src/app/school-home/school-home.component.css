@@ -1,4 +1,21 @@
 .content {
     position: absolute;
     margin-top: 8%;
+
+    width: 100%;
+
 }
+
+.leftPos {
+    width: 25%;
+    margin-left: 5%;
+   float: left;
+   margin-top: 4%;
+  }
+  .rightPos {
+   margin-right: 8%;
+   float: right;
+   width: 55%;
+   margin-top: 4%;
+  }
+

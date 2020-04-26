@@ -1,0 +1,85 @@
+table {
+    width: 100%;
+  }
+  .mat-form-field{
+      width: 100%;
+  }
+  a{
+      color: royalblue;
+    cursor: pointer;
+  }
+
+  .mat-column-actions{
+      width: 3% !important;
+  }
+  .mat-card{
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px;
+
+    width: 100%;
+  }
+
+  .mat-dialog{
+    width: 100%;
+  }
+
+
+.cdk-overlay-pane {
+  width: 400px !important;
+}
+
+
+mat-card{
+
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
+
+}
+
+
+
+.example-form {
+    width: 100%;
+
+    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  .example-full-width {
+    width: 100%;
+    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  }
+
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+button{
+  outline: 0;
+}
+
+.input-headline {
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 400;
+}
+
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+
+
+ul,  
+li {  
+      margin: 0;  
+      padding: 0;  
+      list-style: none;  
+}
+
+.padd{
+  padding: 2%;
+}
