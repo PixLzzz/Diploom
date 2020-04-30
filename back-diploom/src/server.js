@@ -5,12 +5,13 @@ const fs = require('fs')
 const morgan = require('morgan')
 const rfs = require('rotating-file-stream')
 const bitcoin = require('./providers/bitcoin.provider')
-var mysql = require('mysql');
-
+var cors = require('cors');
+var multer = require('multer');
+var upload = multer();
 require('dotenv').config()
-
 const server = express()
-
+var firebase = require("firebase");
+var sha256File = require('sha256-file');
 /**
  * Morgan logging http access in a new file each day
  */
@@ -27,6 +28,7 @@ if (fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)) {
 /**
  * Try MongoDB & Bitcoin-core connection
  */
+
 mongoose
   .connect(process.env.DB, {
     useUnifiedTopology: true,
@@ -46,8 +48,20 @@ bitcoin
     console.error(`Bitcoin error: ${error.message}!`)
   })
 
+
+  // for parsing multipart/form-data
+server.use(upload.array()); 
+server.use(express.static('public'));
+
 server.use(bodyParser.json())
+server.use(bodyParser.raw())
 server.use(bodyParser.urlencoded({ extended: true }))
+server.use(cors())
 require('./routes/example.route')(server)
 
 server.listen(process.env.PORT, () => console.log(`Big brother listening on port ${process.env.PORT}!`))
+
+
+
+
+  
