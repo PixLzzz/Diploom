@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Student } from '../models/student.model';
 import { Router } from '@angular/router';
 import { StudentService } from '../student.service';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-student',
@@ -37,7 +38,7 @@ export class AddStudentComponent implements OnInit {
     {value: 'MCSI', viewValue: 'MCSI'}
   ];
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private router: Router){
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private router: Router,private http: HttpClient){
     
   }
 
@@ -63,6 +64,10 @@ export class AddStudentComponent implements OnInit {
         this.fileUploaded = true;
       }
     );
+
+    console.log(file);
+
+
 }
   
   onSavePoem() {
@@ -79,7 +84,13 @@ export class AddStudentComponent implements OnInit {
       newStudent.diploma = this.fileUrl;
     }
 
-   //this.studentService.createNewStudent(newStudent);
+
+
+
+    this.studentService.createNewStudent(newStudent);
+
+    this.studentService.sendRequestHash(newStudent.diploma);
+
     console.log("gg");
     this.fileUploaded = false;
   }
@@ -87,6 +98,7 @@ export class AddStudentComponent implements OnInit {
   detectFiles(event) {
     this.onUploadFile(event.target.files[0]);
   }
+
 }
 
 interface Category {

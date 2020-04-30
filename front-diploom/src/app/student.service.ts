@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Student } from './models/student.model';
-import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Subject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as firebase from 'firebase';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
 
@@ -122,5 +122,26 @@ export class StudentService {
       );
     }
   }
+
+
+  sendRequestHash(fileLink){
+    
+    var storage = firebase.app().storage("diploom-fa308.appspot.com");
+    var storageRef = storage.refFromURL(fileLink);
+
+    storageRef.getDownloadURL().then((url) => {
+      const headers = { 'Content-Type': 'application/json'}
+      const body = { data: url}
+      this.http.post<any>('http://localhost:1984/hashFile', body, { headers }).subscribe(data => {
+         console.log(data)
+      })
+    });
+
+    
+    
+  }
+
+
+
 
 }
