@@ -15,19 +15,16 @@ const thisFunctionControlSomething = async (req, res) => {
   }
 }
 
-const hashFile = async (req , res) =>{
-  console.log(req.body)
+const hashFile = (req , res , cb) =>{
+  console.log("qq" ,req.body)
   const file = req.body.data
-  try{
-    await exampleService.getFile(file)
-      .then((response) => {
-        console.log("eee" ,response)
-        return response
-      })
-  }catch (error) {
-    console.error(error.message)
-    res.status(500)
-  }
+  exampleService.getFile(file, (res, hash) => {
+    cb(res,hash);
+    console.log("yaya",res , "hash" , hash);
+    if(res){
+      exampleService.updateStudent(res , hash, file);
+    }
+  })
 }
 
 module.exports = {

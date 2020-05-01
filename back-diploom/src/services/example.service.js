@@ -38,24 +38,22 @@ const timestampAndStore = async (idontknow) => {
 }
 
 
-const getFile = async (file ) => {
-  
+const getFile = (file , cb ) => {
 
-  const fileUrl = JSON.stringify(file);
-  const fileid = fileUrl.slice(73)
-  console.log(fileid)
-
-
-  var cb;
   var bucket = admin.storage().bucket("diploom-fa308.appspot.com");
     
   bucket.getFiles().then((data) => {
       const files = data[0];
       console.log(files.length);
 
-      download(file, "../files/test.pdf", cb);
+      download(file, "../files/test.pdf", (res,hash) =>{
+        console.log("res :",res)
+        cb(res,hash)
+      } );
    
   });
+
+
 }
 
 
@@ -67,7 +65,7 @@ var download = function(url, dest, cb) {
     file.on('finish', function() {
       sha256File("/Users/pixlzzz/Desktop/Cours/4A/ProjetAnnuel/diploom/files/test.pdf", function (error, sum) {
         if (error) return console.log(error);
-       console.log(sum) // '345eec8796c03e90b9185e4ae3fc12c1e8ebafa540f7c7821fb5da7a54edc704'
+       console.log("hash" ,sum) 
 
           var options = {
             'method': 'POST',
@@ -81,7 +79,7 @@ var download = function(url, dest, cb) {
           requestModule(options,  (error, response) => { 
             if (error) throw new Error(error);
             console.log(response.body);
-            ret = response.body
+            cb(response.body, sum);
           });
           
 
@@ -93,13 +91,28 @@ var download = function(url, dest, cb) {
     fs.unlink(dest); // Delete the file async. (But we don't check the result)
     if (cb) cb(err.message);
   });
-  return ret;
 };
 
 
-//64247cf8ad38c756d2f49a30e656b62dfd687e59665dda8ffa3be11dc311153c
+const updateStudent = (txid , hash, fileURL) => {
+
+  var db = admin.database();
+  
+  var ref = db.ref("/Students/");
+  ref.orderByChild("diploma").equalTo(fileURL).on("child_added", function(snapshot) {
+    console.log(snapshot.key);
+    var refzer = db.ref("/Students/" + snapshot.key);
+    refzer.update({
+      "txid": txid,
+      "hash": hash
+    })
+  });
+
+
+}
 
 module.exports = {
   timestampAndStore,
-  getFile
+  getFile,
+  updateStudent
 }

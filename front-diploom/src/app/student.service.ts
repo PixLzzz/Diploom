@@ -132,7 +132,7 @@ export class StudentService {
     storageRef.getDownloadURL().then((url) => {
       const headers = { 'Content-Type': 'application/json'}
       const body = { data: url}
-      this.http.post<string>('http://localhost:1984/hashFile', body, { headers }).subscribe(data => {
+      this.http.post<any>('http://localhost:1984/hashFile', body, { headers }).subscribe(data => {
          console.log(data)
       })
     });
