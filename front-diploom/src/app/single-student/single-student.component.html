@@ -1,1 +1,35 @@
-<p>single-student works!</p>
+<div class="content">
+    <mat-card>
+  <div>
+   
+      <div>
+        <h3>{{ student.promo }}</h3> 
+      </div>
+  
+      <!--AFFICHAGE STANDARD-->
+      <div  class="padd">
+        <h1>{{ student.name }} {{student.surname}}</h1>
+        <h3 class="contentCore"><b>Classe : </b>{{ student.fields }}</h3>
+        <h3 class="contentCore"><b>Hash : </b>{{ student.hash }}</h3>
+        <h3 class="contentCore"><b>TxID : </b>{{ student.txid }}</h3>
+        <a [href]="student.diploma" target="_blank" rel="noopener"><b>Diplome  </b> <button mat-icon-button  style="color: #3F51B5;">
+            <mat-icon>get_app</mat-icon>
+        </button>
+        </a>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
+      </div>
+     
+     
+    </div>
+  
+  </mat-card>
+  <br>
+  <br>
+  <br>
+  <br>
+  </div>

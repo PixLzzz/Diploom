@@ -13,7 +13,7 @@
         
           <ng-container matColumnDef="Prenom">
             <th mat-header-cell *matHeaderCellDef> Prénom </th>
-            <td mat-cell *matCellDef="let student"> {{student.surname}} </td>
+            <td class="hrefLink" mat-cell *matCellDef="let student; let i = index"><a (click)="onViewStudent(i)">{{student.surname}}</a></td>
           </ng-container>
 
           <ng-container matColumnDef="Filiere">
