@@ -108,11 +108,94 @@ const updateStudent = (txid , hash, fileURL) => {
     })
   });
 
+}
+
+
+const getFileCheck = (file , cb ) => {
+
+  var bucket = admin.storage().bucket("diploom-fa308.appspot.com");
+    
+  bucket.getFiles().then((data) => {
+      const files = data[0];
+      console.log(files.length);
+
+      downloadcheck(file, "../files/test.pdf", (res,hash) =>{
+        console.log("res :",res)
+        cb(res,hash)
+      } );
+   
+  });
+
 
 }
+
+var downloadcheck = function(url, dest, cb) {
+
+  var file = fs.createWriteStream(dest);
+  var request = https.get(url, function(response) {
+    response.pipe(file);
+    file.on('finish', function() {
+      sha256File("/Users/pixlzzz/Desktop/Cours/4A/ProjetAnnuel/diploom/files/test.pdf", function (error, sum) {
+        if (error) return console.log(error);
+       console.log("hash" ,sum) 
+
+         /* var options = {
+            'method': 'POST',
+            'url': 'http://localhost:1984/checkBlockchain',
+            'headers': {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"hexData":sum})
+          
+          };
+          requestModule(options,  (error, response) => { 
+            if (error) throw new Error(error);
+            console.log(response.body);
+            cb(response.body, sum);
+          });
+          */
+         cb(sum)
+
+
+      })
+      file.close(cb);  // close() is async, call cb after close completes.
+    });
+  }).on('error', function(err) { // Handle errors
+    fs.unlink(dest); // Delete the file async. (But we don't check the result)
+    if (cb) cb(err.message);
+  });
+};
+
+
+var checkInBDD = function (fileUrl , hash , cb ){
+  var db = admin.database();
+  console.log("hash" , hash)
+  var y =0;
+  var ref = db.ref("/Students/");
+  ref.orderByChild("hash").equalTo(hash).on("child_added", function(snapshot) {
+
+    var refzer = db.ref("/Students/" + snapshot.key);
+    var txid = refzer.child("txid");
+    txid.once("value").then(res => {
+      console.log("txid =" , res.val())
+       y =1;
+      cb(res.val(), hash);
+    })
+  });
+
+  if(y == 0){
+    cb(0 , 0);
+  }
+}
+
+
+
+
 
 module.exports = {
   timestampAndStore,
   getFile,
-  updateStudent
+  updateStudent,
+  getFileCheck,
+  checkInBDD,
 }

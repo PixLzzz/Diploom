@@ -18,6 +18,19 @@ const writeOnBitcoin = async (hexData) => {
   }
 }
 
+
+const checkInBC = async (txid , hash) =>{
+  console.log(txid, hash , "yeyo" )
+  try{
+    return await bitcoinProvider.getTransaction(txid)
+  } catch (error){
+    console.log(error)
+  } 
+}
+
+
+
 module.exports = {
-  writeOnBitcoin
+  writeOnBitcoin,
+  checkInBC
 }

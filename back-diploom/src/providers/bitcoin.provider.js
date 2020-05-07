@@ -144,11 +144,31 @@ const sendRawTransaction = async (hex) => new Promise((resolve, reject) => {
     })
 })
 
+
+const getTransaction = async (txid) => new Promise((resolve, reject) => {
+  const body = {
+    jsonrpc: '1.0',
+    method: 'gettransaction',
+    params: [
+      txid
+    ]
+  }
+  axios
+    .post(url, body, headers)
+    .then((response) => {
+      resolve(response.data.result)
+    }).catch((error) => {
+      reject(error)
+    })
+})
+
+
 module.exports = {
   getNewAddress,
   getBlockchainInfo,
   createRawTransaction,
   fundRawTransaction,
   signRawTransactionWithWallet,
-  sendRawTransaction
+  sendRawTransaction,
+  getTransaction
 }

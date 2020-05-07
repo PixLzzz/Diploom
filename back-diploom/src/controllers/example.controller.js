@@ -1,6 +1,6 @@
 const exampleService = require('../services/example.service')
+const bitcoinService = require('../services/bitcoin.service')
 var sha256File = require('sha256-file');
-
 
 const thisFunctionControlSomething = async (req, res) => {
   const idontknow = req.body.hexData
@@ -27,7 +27,30 @@ const hashFile = (req , res , cb) =>{
   })
 }
 
+
+const checkDiploma = (req , res , cb) =>{
+  const file = req.body.data;
+  exampleService.getFileCheck(file, (res) => {
+    cb(res);
+    if(res){
+      console.log("resCheck  : " ,res)
+      exampleService.checkInBDD(file, res , (txid , hash) => {
+        if( txid == 0 ){
+          cb("error");
+        }else{
+          bitcoinService.checkInBC(txid , hash , (res) => {
+            console.log("btc : ",res)
+          });
+        }
+      })
+    }
+  })
+  cb(file);
+  return file;
+}
+
 module.exports = {
   thisFunctionControlSomething,
-  hashFile
+  hashFile,
+  checkDiploma
 }
