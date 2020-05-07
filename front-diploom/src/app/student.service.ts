@@ -141,7 +141,17 @@ export class StudentService {
     
   }
 
+  async checkDiploma(file){
+    const url = "http://localhost:1984/checkDiploma";
 
+    const headers = { 'Content-Type': 'application/json'}
+    const body = { data: file}
+    this.http.post<any>(url, body, { headers }).subscribe(data => {
+      console.log(data)
+    })
+
+
+  }
 
 
 }
