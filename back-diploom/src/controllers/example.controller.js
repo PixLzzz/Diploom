@@ -27,26 +27,24 @@ const hashFile = (req, res, cb) => {
 
 const checkDiploma = (req, res) => {
   const file = req.body.data;
-  console.log('req', req);
-  console.log('req.body', req.body);
   var state = false;
-  exampleService.getFileCheck(file, (res) => {
-    if (res) {
-      exampleService.checkInBDD(file, res, (txid, hash) => {
+  exampleService.getFileCheck(file, (resultFileCheck) => {
+    if (resultFileCheck) {
+      exampleService.checkInBDD(file, resultFileCheck, (txid, hash) => {
         if (txid == 0) {
         } else {
-          bitcoinService.checkInBC(txid, hash, (res) => {
-            console.log("btc : ", res);
-            if (res == hash) {
+          bitcoinService.checkInBC(txid, hash, (resCheckInBC) => {
+            console.log("btc : ", resCheckInBC);
+            if (resCheckInBC == hash) {
               state = true;
             }
             console.log(state);
+            res.send(state);
           });
         }
       });
     }
   });
-  res.send(state);
 };
 module.exports = {
   thisFunctionControlSomething,
