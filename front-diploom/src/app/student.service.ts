@@ -9,108 +9,108 @@ import { DataSnapshot } from '@angular/fire/database/interfaces';
   providedIn: 'root'
 })
 export class StudentService {
-    students: Array<Student> = [];
-    studentsSubject = new Subject<Student[]>();
-    cats : Array<String> = [];
-    catSubject = new Subject<String[]>();
+  students: Array<Student> = [];
+  studentsSubject = new Subject<Student[]>();
+  cats: Array<String> = [];
+  catSubject = new Subject<String[]>();
 
-    constructor(private http: HttpClient,) {
-      this.getStudents();
-    }
+  constructor(private http: HttpClient,) {
+    this.getStudents();
+  }
 
-    emitStudents(){
-      this.studentsSubject.next(this.students);
-    }
+  emitStudents() {
+    this.studentsSubject.next(this.students);
+  }
 
-    emitCats(cat){
-      this.catSubject.next(cat);
-      console.log(cat);
-    }
+  emitCats(cat) {
+    this.catSubject.next(cat);
+    console.log(cat);
+  }
 
-    saveStudents() {
-      firebase.database().ref('/Students').set(this.students);
-    }
+  saveStudents() {
+    firebase.database().ref('/Students').set(this.students);
+  }
 
-    getStudents() {
-      firebase.database().ref('/Students')
-        .on('value', (data: DataSnapshot) => {
-            this.students = data.val() ? data.val() : [];
-            this.emitStudents();
-          }
-        );
-    }
-
-
-
-    getSingleStudent(id: number) {
-      return new Promise(
-        (resolve, reject) => {
-          firebase.database().ref('/Students/' + id).once('value').then(
-            (data: DataSnapshot) => {
-              resolve(data.val());
-            }, (error) => {
-              reject(error);
-            }
-          );
-        }
-      );
-    }
-
-    createNewStudent(newStudent: Student) {
-      console.log(newStudent);
-      this.students.push(newStudent);
-      this.saveStudents();
-      this.emitStudents();
-    }
-
-    removeStudent(student: Student) {
-      if(student.diploma) {
-        const storageRef = firebase.storage().refFromURL(student.diploma);
-        storageRef.delete().then(
-          () => {
-            console.log('File removed!');
-          },
-          (error) => {
-            console.log('Could not remove file! : ' + error);
-          }
-        );
+  getStudents() {
+    firebase.database().ref('/Students')
+      .on('value', (data: DataSnapshot) => {
+        this.students = data.val() ? data.val() : [];
+        this.emitStudents();
       }
-      const studentIndexToRemove = this.students.findIndex(
-        (studentEl) => {
-          if(studentEl === student) {
-            return true;
-          }
-        }
-      );
-      this.students.splice(studentIndexToRemove, 1);
-      this.saveStudents();
-      this.emitStudents();
-    }
-
-    uploadFile(file: File) {
-      return new Promise(
-        (resolve, reject) => {
-          const almostUniqueFileName = Date.now().toString();
-          const upload = firebase.storage().ref()
-            .child('diplomas/' + almostUniqueFileName + file.name).put(file);
-          upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-            () => {
-              console.log('Chargement…');
-            },
-            (error) => {
-              console.log('Erreur de chargement ! : ' + error);
-              reject();
-            },
-            () => {
-              resolve(upload.snapshot.ref.getDownloadURL());
-            }
-          );
-        }
       );
   }
 
-  removeFiles(student : Student){
-    if(student.diploma) {
+
+
+  getSingleStudent(id: number) {
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('/Students/' + id).once('value').then(
+          (data: DataSnapshot) => {
+            resolve(data.val());
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+
+  createNewStudent(newStudent: Student) {
+    console.log(newStudent);
+    this.students.push(newStudent);
+    this.saveStudents();
+    this.emitStudents();
+  }
+
+  removeStudent(student: Student) {
+    if (student.diploma) {
+      const storageRef = firebase.storage().refFromURL(student.diploma);
+      storageRef.delete().then(
+        () => {
+          console.log('File removed!');
+        },
+        (error) => {
+          console.log('Could not remove file! : ' + error);
+        }
+      );
+    }
+    const studentIndexToRemove = this.students.findIndex(
+      (studentEl) => {
+        if (studentEl === student) {
+          return true;
+        }
+      }
+    );
+    this.students.splice(studentIndexToRemove, 1);
+    this.saveStudents();
+    this.emitStudents();
+  }
+
+  uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+        const almostUniqueFileName = Date.now().toString();
+        const upload = firebase.storage().ref()
+          .child('diplomas/' + almostUniqueFileName + file.name).put(file);
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            console.log('Chargement…');
+          },
+          (error) => {
+            console.log('Erreur de chargement ! : ' + error);
+            reject();
+          },
+          () => {
+            resolve(upload.snapshot.ref.getDownloadURL());
+          }
+        );
+      }
+    );
+  }
+
+  removeFiles(student: Student) {
+    if (student.diploma) {
       const storageRef = firebase.storage().refFromURL(student.diploma);
       storageRef.delete().then(
         () => {
@@ -124,33 +124,43 @@ export class StudentService {
   }
 
 
-  sendRequestHash(fileLink){
-    
+  sendRequestHash(fileLink) {
+
     var storage = firebase.app().storage("diploom-fa308.appspot.com");
     var storageRef = storage.refFromURL(fileLink);
 
     storageRef.getDownloadURL().then((url) => {
-      const headers = { 'Content-Type': 'application/json'}
-      const body = { data: url}
+      const headers = { 'Content-Type': 'application/json' }
+      const body = { data: url }
       this.http.post<any>('http://localhost:1984/hashFile', body, { headers }).subscribe(data => {
-         console.log(data)
+        console.log('kkk:', data);
       })
     });
 
-    
-    
+
+
   }
 
-  async checkDiploma(file){
+  checkDiploma(file) {
     const url = "http://localhost:1984/checkDiploma";
-
-    const headers = { 'Content-Type': 'application/json'}
-    const body = { data: file}
-    this.http.post<any>(url, body, { headers }).subscribe(data => {
-      console.log(data)
-    })
-
-
+    const body = { data: file };
+    const headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    this.http.post(url, body, headers)
+      .subscribe(
+        (val) => {
+          console.log("POST call successful value returned in body",
+            val);
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+        });
   }
 
 
