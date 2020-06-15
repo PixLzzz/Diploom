@@ -133,22 +133,6 @@ var downloadcheck = function(url, dest, cb) {
     file.on('finish', function() {
       sha256File("/Users/pixlzzz/Desktop/Cours/4A/ProjetAnnuel/diploom/files/test.pdf", function (error, sum) {
         if (error) return console.log(error);
-
-         /* var options = {
-            'method': 'POST',
-            'url': 'http://localhost:1984/checkBlockchain',
-            'headers': {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({"hexData":sum})
-          
-          };
-          requestModule(options,  (error, response) => { 
-            if (error) throw new Error(error);
-            console.log(response.body);
-            cb(response.body, sum);
-          });
-          */
          cb(sum)
 
 

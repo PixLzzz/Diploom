@@ -29,7 +29,7 @@ const hashFile = (req , res , cb) =>{
 
 const checkDiploma = (req , res , cb) =>{
   const file = req.body.data;
-
+  var state = false;
   exampleService.getFileCheck(file, (res) => {
     if(res){
       exampleService.checkInBDD(file, res , (txid , hash) => {
@@ -38,13 +38,15 @@ const checkDiploma = (req , res , cb) =>{
         }else{
           bitcoinService.checkInBC(txid , hash , (res) => {
             console.log("btc : ",res)
+            if(res==hash){
+              state = true;
+            }
           });
         }
       })
     }
   })
-  cb(file);
-  return file;
+  cb(state);
 }
 
 module.exports = {
