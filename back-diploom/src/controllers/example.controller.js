@@ -27,26 +27,35 @@ const hashFile = (req , res , cb) =>{
 }
 
 
-const checkDiploma = (req , res , cb) =>{
+const checkDiploma = async (req , res, cb) =>{
   const file = req.body.data;
   var state = false;
-  exampleService.getFileCheck(file, (res) => {
-    if(res){
-      exampleService.checkInBDD(file, res , (txid , hash) => {
-        if( txid == 0 ){
-          cb("error");
-        }else{
-          bitcoinService.checkInBC(txid , hash , (res) => {
-            console.log("btc : ",res)
-            if(res==hash){
-              state = true;
-            }
-          });
-        }
-      })
-    }
-  })
-  cb(state);
+  try {
+    await exampleService.getFileCheck(file, (res) => {
+      if(res){
+        exampleService.checkInBDD(file, res , (txid , hash) => {
+          if( txid == 0 ){
+            cb("error");
+          }else{
+            bitcoinService.checkInBC(txid , hash , (res) => {
+              console.log("btc : ",res)
+              if(res==hash){
+                state = true;
+              }
+              console.log(state);
+              cb(state);
+            });
+          }
+        })
+      }
+
+    })
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+  
+
 }
 
 module.exports = {
