@@ -29,15 +29,15 @@ if (fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)) {
  * Try MongoDB & Bitcoin-core connection
  */
 
-mongoose
-  .connect(process.env.DB, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true
-  })
-  .then(() => console.log('MongoDB connected!'))
-  .catch((error) => {
-    console.error(`MongoDB error: ${error.message}!`)
-  })
+// mongoose
+//   .connect(process.env.DB, {
+//     useUnifiedTopology: true,
+//     useNewUrlParser: true
+//   })
+//   .then(() => console.log('MongoDB connected!'))
+//   .catch((error) => {
+//     console.error(`MongoDB error: ${error.message}!`)
+//   })
 
 
 

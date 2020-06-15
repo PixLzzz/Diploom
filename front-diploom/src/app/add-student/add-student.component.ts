@@ -68,6 +68,8 @@ export class AddStudentComponent implements OnInit {
 
     console.log(file);
 
+    // ça a envoyer
+
 
 }
   
