@@ -23,25 +23,6 @@ if (fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)) {
   server.use(morgan('combined', { stream: accessLogStream }))
 }
 
-<<<<<<< HEAD
-/**
- * Try MongoDB & Bitcoin-core connection
- */
-
-// mongoose
-//   .connect(process.env.DB, {
-//     useUnifiedTopology: true,
-//     useNewUrlParser: true
-//   })
-//   .then(() => console.log('MongoDB connected!'))
-//   .catch((error) => {
-//     console.error(`MongoDB error: ${error.message}!`)
-//   })
-
-=======
->>>>>>> 6178fa2f48bcd8a5913654018c99f87db5b19787
-
-
 bitcoin
   .getBlockchainInfo()
   .then((response) => console.log(`Bitcoin connected to ${response} network!`))
