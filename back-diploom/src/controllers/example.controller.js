@@ -20,7 +20,6 @@ const hashFile = (req , res , cb) =>{
   const file = req.body.data
   exampleService.getFile(file, (res, hash) => {
     cb(res,hash);
-    console.log("yaya",res , "hash" , hash);
     if(res){
       exampleService.updateStudent(res , hash, file);
     }
@@ -30,10 +29,9 @@ const hashFile = (req , res , cb) =>{
 
 const checkDiploma = (req , res , cb) =>{
   const file = req.body.data;
+
   exampleService.getFileCheck(file, (res) => {
-    cb(res);
     if(res){
-      console.log("resCheck  : " ,res)
       exampleService.checkInBDD(file, res , (txid , hash) => {
         if( txid == 0 ){
           cb("error");
