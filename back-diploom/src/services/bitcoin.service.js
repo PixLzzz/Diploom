@@ -19,7 +19,7 @@ const writeOnBitcoin = async (hexData) => {
 }
 
 
-const checkInBC = async (txid , hash) =>{
+const checkInBCx = async (txid , hash) =>{
   console.log(txid, hash , "yeyo" )
   try{
     return await bitcoinProvider.getTransaction(txid)
@@ -28,6 +28,24 @@ const checkInBC = async (txid , hash) =>{
   } 
 }
 
+const checkInBC = async (txid, hash,cb) => {
+  let result = null;
+  try {
+    const Tx = await bitcoinProvider.getTransaction(txid, false, true);
+    const vouts = Tx.decoded.vout;
+    Object.keys(vouts).forEach((key) => {
+      if (vouts[key].scriptPubKey.type === 'nulldata') {
+        const asm = vouts[key].scriptPubKey.asm.split(' ');
+        const OP_RETURN = asm[1];
+        result = OP_RETURN;
+      }
+    });
+  } catch (error) {
+    console.error('getOpReturn :', error.message);
+  }
+  console.log(result);
+  cb(result);
+};
 
 
 module.exports = {

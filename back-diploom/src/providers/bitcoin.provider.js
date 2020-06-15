@@ -145,12 +145,14 @@ const sendRawTransaction = async (hex) => new Promise((resolve, reject) => {
 })
 
 
-const getTransaction = async (txid) => new Promise((resolve, reject) => {
+const getTransactionx = async (txid) => new Promise((resolve, reject) => {
   const body = {
     jsonrpc: '1.0',
     method: 'gettransaction',
     params: [
-      txid
+      txid,
+      false,
+      true
     ]
   }
   axios
@@ -161,6 +163,27 @@ const getTransaction = async (txid) => new Promise((resolve, reject) => {
       reject(error)
     })
 })
+
+const getTransaction = async (txid, watchonly, verbose) => new Promise((resolve, reject) => {
+  const tmp = txid.split('"');
+  const newTxId = tmp[1];
+  const body = {
+    jsonrpc: '1.0',
+    method: 'gettransaction',
+    params: [
+      newTxId,
+      watchonly,
+      verbose,
+    ],
+  };
+  axios
+    .post(url, body, headers)
+    .then((response) => {
+      resolve(response.data.result);
+    }).catch((error) => {
+      reject(error);
+    });
+});
 
 
 module.exports = {

@@ -1,6 +1,5 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
 const fs = require('fs')
 const morgan = require('morgan')
 const rfs = require('rotating-file-stream')
@@ -12,9 +11,8 @@ require('dotenv').config()
 const server = express()
 var firebase = require("firebase");
 var sha256File = require('sha256-file');
-/**
- * Morgan logging http access in a new file each day
- */
+
+
 const logDirectory = './logs'
 if (fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)) {
   const utcDate = new Date().toDateString()
@@ -25,6 +23,7 @@ if (fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)) {
   server.use(morgan('combined', { stream: accessLogStream }))
 }
 
+<<<<<<< HEAD
 /**
  * Try MongoDB & Bitcoin-core connection
  */
@@ -39,6 +38,8 @@ if (fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)) {
 //     console.error(`MongoDB error: ${error.message}!`)
 //   })
 
+=======
+>>>>>>> 6178fa2f48bcd8a5913654018c99f87db5b19787
 
 
 bitcoin

@@ -65,7 +65,6 @@ var download = function(url, dest, cb) {
     file.on('finish', function() {
       sha256File("/Users/pixlzzz/Desktop/Cours/4A/ProjetAnnuel/diploom/files/test.pdf", function (error, sum) {
         if (error) return console.log(error);
-       console.log("hash" ,sum) 
 
           var options = {
             'method': 'POST',
@@ -100,7 +99,6 @@ const updateStudent = (txid , hash, fileURL) => {
   
   var ref = db.ref("/Students/");
   ref.orderByChild("diploma").equalTo(fileURL).on("child_added", function(snapshot) {
-    console.log(snapshot.key);
     var refzer = db.ref("/Students/" + snapshot.key);
     refzer.update({
       "txid": txid,
@@ -117,10 +115,8 @@ const getFileCheck = (file , cb ) => {
     
   bucket.getFiles().then((data) => {
       const files = data[0];
-      console.log(files.length);
 
       downloadcheck(file, "../files/test.pdf", (res,hash) =>{
-        console.log("res :",res)
         cb(res,hash)
       } );
    
@@ -137,7 +133,6 @@ var downloadcheck = function(url, dest, cb) {
     file.on('finish', function() {
       sha256File("/Users/pixlzzz/Desktop/Cours/4A/ProjetAnnuel/diploom/files/test.pdf", function (error, sum) {
         if (error) return console.log(error);
-       console.log("hash" ,sum) 
 
          /* var options = {
             'method': 'POST',
@@ -169,23 +164,14 @@ var downloadcheck = function(url, dest, cb) {
 
 var checkInBDD = function (fileUrl , hash , cb ){
   var db = admin.database();
-  console.log("hash" , hash)
-  var y =0;
   var ref = db.ref("/Students/");
   ref.orderByChild("hash").equalTo(hash).on("child_added", function(snapshot) {
-
     var refzer = db.ref("/Students/" + snapshot.key);
     var txid = refzer.child("txid");
     txid.once("value").then(res => {
-      console.log("txid =" , res.val())
-       y =1;
       cb(res.val(), hash);
     })
   });
-
-  if(y == 0){
-    cb(0 , 0);
-  }
 }
 
 
