@@ -50,6 +50,7 @@ export class AddStudentComponent implements OnInit {
     this.studentForm = this.formBuilder.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
+      email : ['', Validators.required],
       promo: ['', Validators.required],
       
     });
@@ -73,11 +74,13 @@ export class AddStudentComponent implements OnInit {
   onSavePoem() {
     const name = this.studentForm.get('name').value;
     const surname = this.studentForm.get('surname').value;
+    const email = this.studentForm.get('surname').value;
     const promo = this.studentForm.get('promo').value;
     const fields = this.selectedValue;
     const newStudent = new Student();
     newStudent.name = name;
     newStudent.surname = surname;
+    newStudent.email = email;
     newStudent.promo = promo;
     newStudent.fields = fields;
     if(this.fileUrl && this.fileUrl !== '') {
