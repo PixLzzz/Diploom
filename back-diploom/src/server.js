@@ -23,8 +23,6 @@ if (fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)) {
   server.use(morgan('combined', { stream: accessLogStream }))
 }
 
-
-
 bitcoin
   .getBlockchainInfo()
   .then((response) => console.log(`Bitcoin connected to ${response} network!`))
