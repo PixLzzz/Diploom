@@ -11,7 +11,7 @@ require('dotenv').config()
 const server = express()
 var firebase = require("firebase");
 var sha256File = require('sha256-file');
-
+var myRouter = require('./routes/example.route');
 
 const logDirectory = './logs'
 if (fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)) {
@@ -39,7 +39,8 @@ server.use(bodyParser.json())
 server.use(bodyParser.raw())
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(cors())
-require('./routes/example.route')(server)
+
+server.use('/', myRouter);
 
 server.listen(process.env.PORT, () => console.log(`Big brother listening on port ${process.env.PORT}!`))
 

@@ -1,7 +1,9 @@
+const express = require('express')
+var router = express.Router();
 const exampleController = require('../controllers/example.controller')
 
-module.exports = (server) => {
-  server.route('/blockchainit').post(exampleController.thisFunctionControlSomething),
-  server.route('/hashFile').post(exampleController.hashFile),
-  server.route('/checkDiploma').post(exampleController.checkDiploma)
-}
+router.post('/blockchainit', exampleController.thisFunctionControlSomething);
+router.post('/hashFile', exampleController.hashFile);
+router.post('/checkDiploma', exampleController.checkDiploma);
+
+module.exports = router;
