@@ -1,0 +1,42 @@
+<div class="content">
+
+    <div class="container-fluid">
+        <div style="color :#3F51B5;">
+            <h1>Contact</h1>
+        </div>
+
+
+
+        <form [formGroup]="contactForm" (ngSubmit)="sendMessage()">
+
+
+            <mat-form-field class="example-full-width titleLimit">
+                <mat-label>Nom</mat-label>
+                <input type="text" matInput placeholder="Entrez le nom..." id="name" formControlName="name">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field class="example-full-width titleLimit">
+                <mat-label>Email</mat-label>
+                <input type="text" matInput placeholder="Entrez le mail..." id="email" formControlName="email">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Message</mat-label>
+                <textarea matInput placeholder="Message..." id="message" formControlName="message"></textarea>
+            </mat-form-field>
+
+            <br>
+
+
+            <button class="btn btn-success" [disabled]="contactForm.invalid" type="submit">Envoyer</button>
+
+        </form>
+    </div>
+
+
+
+</div>

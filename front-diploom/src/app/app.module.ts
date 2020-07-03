@@ -33,6 +33,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SingleStudentComponent } from './single-student/single-student.component';
+import { ContactComponent } from './contact/contact.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -47,7 +48,8 @@ firebase.initializeApp(environment.firebase);
     AddStudentComponent,
     StudentListComponent,
     DialogComponent,
-    SingleStudentComponent
+    SingleStudentComponent,
+    ContactComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
