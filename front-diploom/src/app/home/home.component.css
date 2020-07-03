@@ -1,5 +1,30 @@
 .content {
-    position: absolute;
-    margin-top: 8%;
+
+    margin: auto;
+
+    
+  width: 30%;
+    /*background-color: #3f51b5;
+    color: whitesmoke;*/
+    color: #3f51b5;
+    padding: 0.5%;
+    text-align: center;
+    
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px;
+
 }
 
+.res{
+  margin: auto;
+  width: 6%;
+}
+
+.result{
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px;
+  background-color: white ;
+  margin-left: 30%;
+  margin-right: 30%;
+  padding: 5%;
+  position: absolute;
+  width: 30%;
+}

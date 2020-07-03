@@ -13,6 +13,7 @@ export class StudentService {
   studentsSubject = new Subject<Student[]>();
   cats: Array<String> = [];
   catSubject = new Subject<String[]>();
+  checkSubject = new Subject<Object>();
 
   constructor(private http: HttpClient,) {
     this.getStudents();
@@ -141,7 +142,8 @@ export class StudentService {
 
   }
 
-  checkDiploma(file) {
+   checkDiploma(file) {
+    let value = false;
     const url = "http://localhost:1984/checkDiploma";
     const body = { data: file };
     const headers = {
@@ -154,6 +156,8 @@ export class StudentService {
         (val) => {
           console.log("POST call successful value returned in body",
             val);
+            this.checkSubject.next(val);
+            value = true;
         },
         response => {
           console.log("POST call in error", response);
@@ -161,7 +165,13 @@ export class StudentService {
         () => {
           console.log("The POST observable is now completed.");
         });
+        
+
   }
 
+  timeout(ms) { //pass a time in milliseconds to this function
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
 
 }

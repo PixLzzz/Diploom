@@ -1,18 +1,27 @@
-
+<br><br><br><br><br><br>
 <div class="content">
    
-    <img style="max-width:400px;" [src]="cheminImage" >
+   <!--<img style="max-width:400px;" [src]="cheminImage" >--> 
     <form [formGroup]="studentForm" (ngSubmit)="onCheckDiploma()">
     <input type="file" (change)="detectFiles($event)"
                  class="filePics" accept="application/pdf">
           <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
 
 
-          <button class="btn btn-success"
-                  type="submit">Enregistrer
-          </button>
+          <button mat-flat-button color="primary" type="submit">Vérifier</button>
+
 
         </form>
+
+</div>
+<br><br><br>
+
+<div class="res" *ngIf="isLooking">
+  <mat-spinner></mat-spinner>
+
 </div>
 
-
+<div class="result" *ngIf="printRes">
+  Félicitations ! Votre diplôme est authentique : Voici la TxID correspondante : {{currentTx}}
+  
+</div>

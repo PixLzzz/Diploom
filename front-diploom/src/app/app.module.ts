@@ -33,6 +33,8 @@ import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SingleStudentComponent } from './single-student/single-student.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 firebase.initializeApp(environment.firebase);
 
@@ -70,6 +72,7 @@ firebase.initializeApp(environment.firebase);
     MatDividerModule,
     HttpClientModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     MatSnackBarModule
   ],
   providers: [AuthService, StudentService],
