@@ -38,8 +38,8 @@ const checkDiploma = (req, res) => {
             if (resCheckInBC == hash) {
               state = true;
             }
-            console.log(state);
-            res.send(state);
+            console.log(txid);
+            res.send(txid);
           });
         }
       });
