@@ -1,5 +1,5 @@
-<div class="content">
-
+<!--<div class="content">
+<br><br>
     <div class="container-fluid">
         <div style="color :#3F51B5;">
             <h1>Contact</h1>
@@ -24,19 +24,72 @@
 
             <br>
 
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" >
                 <mat-label>Message</mat-label>
-                <textarea matInput placeholder="Message..." id="message" formControlName="message"></textarea>
+                <textarea class="textAreaSize" matInput placeholder="Message..." id="message" formControlName="message"></textarea>
             </mat-form-field>
 
             <br>
+            <br><br>
 
-
-            <button class="btn btn-success" [disabled]="contactForm.invalid" type="submit">Envoyer</button>
+            
+            <button  mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Envoyer</button>
 
         </form>
     </div>
 
 
 
+</div>-->
+
+<div class="parallaxContact">
 </div>
+  <div class="content">
+    <mat-card class="example-card">
+      <mat-card-header>
+          <div mat-card-avatar class="example-header-image"><mat-icon>contact_support</mat-icon></div>
+        <mat-card-title><h1>Demande de contact</h1></mat-card-title>
+        <mat-card-subtitle>Une remarque ? Une suggestion ? N'hesitez pas à m'écrire.</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <form [formGroup]="contactForm" (ngSubmit)="sendMessage()">
+
+
+            <mat-form-field class="example-full-width titleLimit">
+                <mat-label>Nom</mat-label>
+                <input type="text" matInput placeholder="Entrez le nom..." id="name" formControlName="name">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field class="example-full-width titleLimit">
+                <mat-label>Email</mat-label>
+                <input type="text" matInput placeholder="Entrez le mail..." id="email" formControlName="email">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field class="example-full-width" >
+                <mat-label>Message</mat-label>
+                <textarea class="textAreaSize" matInput placeholder="Message..." id="message" formControlName="message"></textarea>
+            </mat-form-field>
+
+            <br>
+            <br><br>
+
+            
+            <button  mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Envoyer</button>
+
+        </form>
+        <br><br>
+        <div *ngIf="msgSent">
+            <p style="color: darkgreen;">Votre message a bien été envoyé !</p>
+        </div>
+
+
+              
+      </mat-card-content>
+    </mat-card>
+  </div>
