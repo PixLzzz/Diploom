@@ -58,7 +58,7 @@ export class ContactComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       Body: `<i>You received a new message from diploom.com : </i> <br /> <b>From Email: </b>${body.fromMail}<br /> <b>Name: </b>${body.name}<br /> <b>Message: </b>${body.message}<br /> <br> <b>~Diploom.~</b>`
     }).then(message => {
-      alert(message);
+      console.log(message);
     });
   }
 

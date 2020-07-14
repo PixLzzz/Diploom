@@ -94,7 +94,7 @@ export class AddStudentComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
         Body: `<i>Please find your diploma in the attachments.</i> <br /> <b>Email: </b>${body.to}<br /> <b>Name: </b>${body.name}<br /> <b>Surname: </b>${body.surname}<br /> <b>Promo: </b>${body.promo}<br /> <br><br> <b>~Diploom.~</b>`
       }).then(message => {
-        alert(message);
+        console.log(message);
       });
     };
     // tslint:disable-next-line:only-arrow-functions
@@ -151,6 +151,14 @@ export class AddStudentComponent implements OnInit {
     this.handleFile(email, name, surname, promo);
 
     this.fileUploaded = false;
+
+    this.studentForm.reset({
+      name: '',
+      surname: '',
+      email: '',
+      promo: ''
+    });
+
 
   }
 
