@@ -1,12 +1,35 @@
+<div class="homePage">
+
 <br><br><br><br><br><br>
 <div class="content">
    
-   <!--<img style="max-width:400px;" [src]="cheminImage" >--> 
+   <!--<img style="max-width:400px;" [src]="cheminImage" >-->
     <form [formGroup]="studentForm" (ngSubmit)="onCheckDiploma()">
-    <input type="file" (change)="detectFiles($event)"
-                 class="filePics" accept="application/pdf">
-          <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+   <input type="file" (change)="detectFiles($event)"
+                 class="filePics" accept="application/pdf"> 
 
+<!--
+                 <div class="drop">
+                  <div class="cont">
+                      <i class="fa fa-cloud-upload"></i>
+                      <div style="color: black;" class="tit">
+                          Drag & Drop
+                      </div>
+                      <div class="desc">
+                          &nbsp;
+                      </div>
+                      <div class="browse">
+                          click here to browse
+                      </div>
+                  </div>
+                  <input (change)="detectFiles($event)" id="csv" type="file" accept="application/pdf"/>
+              </div>
+              
+             
+              -->
+
+          <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+              <br><br>
 
           <button mat-flat-button color="primary" type="submit">Vérifier</button>
 
@@ -21,7 +44,13 @@
 
 </div>
 
-<div class="result" *ngIf="printRes">
-  Félicitations ! Votre diplôme est authentique : Voici la TxID correspondante : {{currentTx}}
+<div class="contenta" *ngIf="printRes">
+  <p style="color: floralwhite;">Félicitations ! Votre diplôme est authentique : Voici la TxID correspondante : </p><p style="color: deepskyblue;">{{currentTx}}</p>
   
+</div>
+
+<div class="contenta" *ngIf="notFound">
+    <p style="color: floralwhite;">Ce diplôme n'existe pas.
+  </div>
+
 </div>

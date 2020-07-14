@@ -1,7 +1,56 @@
-.content form {
-    margin-top: 70px;
-    text-align: center;
+
+
+
+mat-card{
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
+    padding: 5%;
 }
-.mat-form-field {
-    width: 650px;
+  
+.example-full-width {
+    width: 100%;
+  }
+  .material-icons{
+      font-size: 40px;
+  }
+
+  .textAreaSize{
+      height: 200px;
+  }
+
+  .titleLimit{
+      width: 50%;
+  }
+
+.content{
+    
+        padding-top: 8%;
+        height:100%; background-size:cover; width:auto;
+
+        background-image: url('../../../img/contact.jpg');
+        background-position:50% 50%;
+
 }
+
+.mat-card-content{
+    padding-top: 2%;
+
+}
+
+
+.parallaxPoemHome {
+    /* The image used */
+    background-image: url('../../../img/contact.jpg');
+  
+    /* Full height */
+    height: 100%;
+
+    
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

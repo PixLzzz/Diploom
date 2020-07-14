@@ -20,8 +20,10 @@ export class HomeComponent implements OnInit {
   cheminImage = "../../app/img/logopa.png";
   isLooking =false;
   printRes = false;
+  notFound = false
   currentTx = "";
   ngOnInit(): void {
+
     this.studentForm = this.formBuilder.group({
     });
     this.checkSubscription = this.studentService.checkSubject.subscribe(
@@ -33,6 +35,8 @@ export class HomeComponent implements OnInit {
          if(aya.length > 10){
            this.printRes = true;
            this.currentTx = aya;
+         }else{
+           this.notFound = true;
          }
       }
     );
@@ -54,6 +58,9 @@ export class HomeComponent implements OnInit {
 
   detectFiles(event) {
     this.onUploadFile(event.target.files[0]);
+    this.notFound = false;
+    this.printRes = false;
+    this.fileUploaded = false;
   }
 
   onUploadFile(file: File) {
@@ -63,6 +70,7 @@ export class HomeComponent implements OnInit {
         this.fileUrl = url;
         this.fileIsUploading = false;
         this.fileUploaded = true;
+        
       }
     );
 
