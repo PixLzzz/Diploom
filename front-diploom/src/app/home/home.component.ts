@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   printRes = false;
   notFound = false
   currentTx = "";
+  currentHash = "";
   ngOnInit(): void {
 
     this.studentForm = this.formBuilder.group({
@@ -29,12 +30,20 @@ export class HomeComponent implements OnInit {
     this.checkSubscription = this.studentService.checkSubject.subscribe(
       (check: Object[]) => {
         this.currentTx = "";
+        this.currentHash = "";
          let aya = JSON.stringify(check);
          console.log(aya)
          this.isLooking =false;
          if(aya.length > 10){
            this.printRes = true;
-           this.currentTx = aya;
+           let buff = JSON.parse(aya);
+           let buuf = JSON.parse(aya);
+           
+           this.currentTx = buff.slice(3,-70);
+           this.currentHash = buuf.slice(72,-1);
+
+           console.log(this.currentHash)
+
          }else{
            this.notFound = true;
          }
