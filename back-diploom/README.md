@@ -98,8 +98,3 @@ When you click to see the details you should find something like this :
 * [morgan](https://www.npmjs.com/package/morgan) - HTTP request logger middleware for node.js.
 * [rotating-file-stream](https://www.npmjs.com/package/rotating-file-stream) - Creates a stream.Writable to a file which is rotated. Rotation behaviour can be deeply customized; optionally, classical UNIX logrotate behaviour can be used.
 * [file-system](https://www.npmjs.com/package/file-system) - This module make file operation apis simple, you don't need to care the dir exits and the api is same as node's filesystem. This is no exists time cost for this plugin.
-
-
-## Author
-
- * **ethicnology**
